@@ -1,80 +1,100 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "From zero to running Claude in the browser — in under 5 minutes."
 ---
 
-## Get started in three steps
+## Prerequisites
 
-Get your documentation site running locally and make your first customization.
+Before you start, make sure you have:
 
-### Step 1: Set up your local environment
+- **Claude Code** installed on your computer ([download here](https://claude.ai/download))
+- **Node.js 18+** installed ([nodejs.org](https://nodejs.org))
+- An active **Claude subscription** (Pro or Max plan)
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+## Step 1: Install the Bridge
 
-### Step 2: Deploy your changes
+The Bridge is a small program that runs on your computer and connects it to the Coder1 IDE in your browser.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+<Tabs>
+  <Tab title="Quick Install (Recommended)">
+    Open your terminal and run:
+    ```bash
+    curl -sL https://coder1.ai/install-bridge.sh | bash
+    ```
+    This downloads and installs the `coder1-bridge` command. No sudo required.
+  </Tab>
+  <Tab title="Manual Install">
+    If you prefer to review the code first:
+    ```bash
+    git clone https://github.com/MichaelrKraft/coder1-ide.git
+    cd coder1-ide/bridge-cli
+    npm install
+    npm link
+    ```
+  </Tab>
+</Tabs>
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+Verify the install worked:
+```bash
+coder1-bridge --version
+```
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+## Step 2: Open the IDE
 
-### Step 3: Go live
+Go to **[coder1.ai/ide](https://coder1.ai/ide)** in your browser.
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+## Step 3: Connect the Bridge
 
-## Next steps
+<Steps>
+  <Step title="Click the Bridge button">
+    Click the **Bridge** button (cyan, top right of the IDE). You'll see a 6-digit pairing code like `823456`.
+  </Step>
+  <Step title="Start the bridge locally">
+    In your **local terminal** (not the web terminal), run:
+    ```bash
+    coder1-bridge start
+    ```
+  </Step>
+  <Step title="Enter the pairing code">
+    When prompted, enter the 6-digit code from the IDE. The code expires after 5 minutes.
+  </Step>
+  <Step title="Watch for confirmation">
+    You'll see:
+    ```
+    ✅ Connected successfully!
+    🚀 Bridge is active
+    ```
+    The Bridge button in the IDE will turn green.
+  </Step>
+</Steps>
 
-Now that you have your docs running, explore these key features:
+## Step 4: Test It
+
+In the **web terminal** (inside the IDE), type:
+
+```bash
+claude "Hello! Can you hear me?"
+```
+
+Claude should respond. You're connected!
+
+<Tip>
+  The bridge runs on YOUR computer. Close the terminal tab and the connection drops. To reconnect, just run `coder1-bridge start` again.
+</Tip>
+
+## Next Steps
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Bridge Setup Details" icon="bridge" href="/getting-started/bridge-setup">
+    Platform-specific install guides, troubleshooting, and advanced options.
+  </Card>
+  <Card title="Meet Johnny5" icon="robot" href="/features/johnny5">
+    Your AI assistant with persistent memory and autonomous task execution.
+  </Card>
+  <Card title="FAQ" icon="circle-question" href="/troubleshooting/faq">
+    Common questions answered.
+  </Card>
+  <Card title="Security" icon="shield-halved" href="/security/overview">
+    How we keep your code private.
+  </Card>
 </CardGroup>
-
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>

@@ -1,0 +1,141 @@
+---
+title: "Bridge Setup"
+description: "Install and connect the Coder1 Bridge to run Claude Code locally through the web IDE."
+---
+
+## What Is the Bridge?
+
+The Bridge is a lightweight program that runs on your computer and creates a secure tunnel between the Coder1 web IDE and your local Claude Code CLI.
+
+```
+┌─────────────────┐         ┌──────────────────┐
+│  Coder1 Website │◄──────►│  YOUR Computer   │
+│  (In Browser)   │  Bridge │  (Stays Private) │
+└─────────────────┘         └──────────────────┘
+     You type                   Commands run
+     commands here              here locally
+```
+
+**Your code never leaves your machine.** Only commands and their output travel over the encrypted connection.
+
+## Installation
+
+### Option A: One-Line Install
+
+```bash
+curl -sL https://coder1.ai/install-bridge.sh | bash
+```
+
+This script:
+1. Checks for Node.js (won't proceed if missing)
+2. Downloads the Bridge CLI
+3. Makes `coder1-bridge` available in your terminal
+4. Creates `~/.coder1/` config directory
+
+No `sudo` required — everything installs in your user directory.
+
+### Option B: Install from Source
+
+For security-conscious users who want to review the code first:
+
+```bash
+# Download and review the installer
+curl -sL https://coder1.ai/install-bridge.sh > install.sh
+cat install.sh
+bash install.sh
+
+# OR clone from GitHub directly
+git clone https://github.com/MichaelrKraft/coder1-ide.git
+cd coder1-ide/bridge-cli
+npm install && npm link
+```
+
+### Verify Installation
+
+```bash
+coder1-bridge --version
+# Expected: coder1-bridge/1.x.x
+```
+
+## Connecting to the IDE
+
+<Steps>
+  <Step title="Open Coder1 IDE">
+    Go to [coder1.ai/ide](https://coder1.ai/ide). Click the **Bridge** button (cyan, top right) to get your pairing code.
+  </Step>
+  <Step title="Open YOUR local terminal">
+    **Not the web terminal** — open the Terminal app on your computer:
+    - **Mac:** Cmd+Space → type "Terminal"
+    - **Windows:** Win+R → type "cmd"
+    - **Linux:** Ctrl+Alt+T
+  </Step>
+  <Step title="Start the bridge">
+    ```bash
+    coder1-bridge start
+    ```
+    You'll see a prompt for the pairing code.
+  </Step>
+  <Step title="Enter the pairing code">
+    Type the 6-digit code shown in the IDE. Codes expire after **5 minutes** and are single-use.
+  </Step>
+  <Step title="Confirm connection">
+    ```
+    ✅ Connected successfully!
+    🚀 Bridge is active - you can now use Claude commands in the IDE
+    ```
+  </Step>
+</Steps>
+
+## Using the Bridge
+
+Once connected, commands you type in the web terminal run on your machine:
+
+```bash
+# Ask Claude for help
+claude "How do I center a div in CSS?"
+
+# Generate code
+claude "Create a React button component with hover effects"
+
+# Debug code
+claude "Why is this function not working?" --file ./my-file.js
+```
+
+## Disconnecting
+
+Press **Ctrl+C** in the terminal where `coder1-bridge start` is running. Your computer is immediately disconnected.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="'Command not found: coder1-bridge'">
+    The installer may not have added it to your PATH. Try:
+    ```bash
+    npm install -g coder1-bridge
+    # Or add to PATH:
+    export PATH="$PATH:~/.npm-global/bin"
+    ```
+  </Accordion>
+  <Accordion title="'Invalid pairing code'">
+    Codes expire after 5 minutes. Click the **Bridge** button in the IDE to generate a fresh code.
+  </Accordion>
+  <Accordion title="'Connection failed'">
+    1. Check your internet connection
+    2. Verify you can reach coder1.ai
+    3. Restart: Ctrl+C, then `coder1-bridge start` again
+  </Accordion>
+  <Accordion title="'Claude Code not found'">
+    Install Claude Code first: [claude.ai/download](https://claude.ai/download). Then retry.
+  </Accordion>
+  <Accordion title="Bridge connects but commands time out">
+    After a server restart, wait a few seconds and refresh the browser before sending commands. The bridge infrastructure needs a moment to warm up.
+  </Accordion>
+</AccordionGroup>
+
+## Bridge Diagnostics
+
+```bash
+coder1-bridge status    # Check connection status
+coder1-bridge test      # Test Claude CLI execution
+coder1-bridge diagnose  # Full diagnostic report
+```

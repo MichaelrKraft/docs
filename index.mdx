@@ -1,97 +1,62 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Coder1 Documentation"
+description: "The agentic IDE built for Claude Code users. Build software with AI at your side."
 ---
 
-## Setting up
+## Welcome to Coder1
 
-Get your documentation site up and running in minutes.
+Coder1 is a web-based IDE that connects to your local Claude Code subscription via the Bridge — giving you a full development environment accessible from any browser, without your code ever leaving your machine.
 
 <Card
-  title="Start here"
+  title="Get started in 5 minutes"
   icon="rocket"
   href="/quickstart"
   horizontal
 >
-  Follow our three step quickstart guide.
+  Install the Bridge, connect your Claude Code subscription, and start building.
 </Card>
 
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
+## Core Concepts
 
 <Columns cols={2}>
   <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
+    title="The Bridge"
+    icon="bridge"
+    href="/getting-started/bridge-setup"
   >
-    Edit your docs locally and preview them in real time.
+    A secure local connector that lets Coder1 run Claude on YOUR computer. Your code never leaves your machine.
   </Card>
   <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
+    title="Johnny5 AI Assistant"
+    icon="robot"
+    href="/features/johnny5"
   >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+    Your persistent AI assistant with long-term memory, autonomous task execution, and custom skills.
   </Card>
   <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
+    title="FAQ"
+    icon="circle-question"
+    href="/troubleshooting/faq"
   >
-    Auto-generate API documentation from OpenAPI specifications.
+    Common questions about setup, the Bridge, and how Coder1 works.
+  </Card>
+  <Card
+    title="Security Overview"
+    icon="shield-halved"
+    href="/security/overview"
+  >
+    How we keep your code private and your connection secure.
   </Card>
 </Columns>
 
-## Create beautiful pages
+## How It Works
 
-Everything you need to create world-class documentation.
+```
+Your Browser (Coder1 IDE) ←──── Bridge ────→ Your Computer
+      ↑                                            ↓
+  You type commands                    Claude Code CLI runs locally
+      ↑                                            ↓
+  Results displayed ←──────────────────── Response streams back
+```
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
-
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+**Key principle:** Coder1 is a remote control for your local Claude — not a cloud AI service. Your files, your subscription, your machine.

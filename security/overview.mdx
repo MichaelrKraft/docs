@@ -1,0 +1,113 @@
+---
+title: "Security Overview"
+description: "How Coder1 keeps your code private and your connection secure."
+---
+
+## The Security Model
+
+Coder1 is built on a **local-first security** principle: your code never leaves your computer. The Bridge acts as a secure relay — it forwards commands and responses, but never stores them.
+
+```
+What we CAN see:              What we CANNOT see:
+✅ "User sent a command"      ❌ Your actual code
+✅ "Command completed"        ❌ Your file contents
+✅ Connection timing          ❌ Command contents
+✅ Bridge version             ❌ Your directory structure
+```
+
+## What Travels Over the Connection
+
+**Travels (encrypted):**
+- Commands you type in the IDE
+- Output from those commands
+- Connection handshakes and heartbeats
+
+**Stays local (never sent):**
+- Your source files (`.js`, `.py`, `.ts`, etc.)
+- Your environment variables
+- Your Claude API key
+- Your SSH keys, passwords, secrets
+
+## Encryption
+
+All communication uses **WSS (WebSocket Secure) over TLS 1.3** — the same encryption used by online banking.
+
+| Layer | Protocol | What It Does |
+|-------|----------|--------------|
+| Transport | TLS 1.3 | Encrypts all data in transit |
+| WebSocket | WSS | Persistent encrypted channel |
+| Authentication | JWT + pairing codes | Proves you authorized the connection |
+
+## Authentication Flow
+
+Connecting the Bridge requires two factors: the pairing code (generated in your browser session) and the Bridge client running on your machine.
+
+```
+1. You click "Bridge" in the IDE → server generates 6-digit code
+2. Code is single-use and expires in 5 minutes
+3. You enter the code in your local terminal
+4. Server validates code, issues a session JWT
+5. All subsequent commands use the JWT — no more codes needed
+```
+
+**Stolen code scenario:** An attacker who intercepts your pairing code still can't connect — they'd also need access to your browser session AND have the Bridge running on your computer. Residual risk: LOW.
+
+## Pairing Code Security
+
+| Property | Value |
+|----------|-------|
+| Length | 6 digits (1,000,000 possibilities) |
+| Expiry | 5 minutes |
+| Reuse | Single-use only |
+| Binding | Tied to your browser session |
+| Rate limit | Max 5 code generations per minute |
+
+## Least Privilege
+
+The Bridge runs under **your user account** — not root. It inherits your shell permissions, so it can only do what you could do yourself in a terminal. No elevated privileges are requested or required.
+
+## Open Source
+
+The Bridge client is open source and fully auditable:
+
+```bash
+# Review the code before installing
+git clone https://github.com/MichaelrKraft/coder1-ide.git
+cd coder1-ide/bridge-cli
+# Read the source, then install:
+npm install && npm link
+```
+
+## Privacy & Data Retention
+
+| Data | Collected | Retention |
+|------|-----------|-----------|
+| Connection timestamps | Yes | 30 days |
+| Command count (not content) | Yes | 30 days |
+| Crash logs | Yes | 30 days |
+| Code content | **Never** | — |
+| Command text | **Never** | — |
+| File paths | **Never** | — |
+
+### Disable Telemetry
+
+```bash
+export CODER1_TELEMETRY=false
+coder1-bridge start
+```
+
+Add to `~/.zshrc` or `~/.bashrc` to make permanent.
+
+## Reporting Security Issues
+
+Found a vulnerability? Please email us with subject **"SECURITY: [issue]"** before public disclosure. We commit to responding within 48 hours and will credit you in release notes if desired.
+
+**GitHub Issues:** [github.com/MichaelrKraft/coder1-ide/issues](https://github.com/MichaelrKraft/coder1-ide/issues)
+
+<Warning>
+  Please don't post security vulnerabilities publicly before giving us a chance to fix them. We take security seriously and move fast on fixes.
+</Warning>
+
+## Audit Status
+
+A third-party security audit is planned before General Availability. The Bridge is currently in alpha — code is iterating quickly. Full audit scope: penetration testing, code review, infrastructure assessment, SOC 2 / GDPR compliance.

@@ -1,0 +1,118 @@
+---
+title: "Johnny5 AI Assistant"
+description: "Your persistent AI assistant with long-term memory, autonomous task execution, and custom skills."
+---
+
+## What Is Johnny5?
+
+Johnny5 is Coder1's built-in AI assistant — a conversational Claude-powered assistant that lives in the IDE sidebar. Unlike a standard chat interface, Johnny5 has **persistent memory** across sessions, can **execute autonomous tasks**, and learns your workflows over time.
+
+<Note>
+  Johnny5 is accessible from the **Johnny5 tab** in the IDE sidebar. No bridge required — it connects through Coder1's servers using your account.
+</Note>
+
+## Key Capabilities
+
+<Columns cols={2}>
+  <Card title="Long-Term Memory" icon="brain">
+    Johnny5 remembers facts, preferences, and context across sessions. Tell it once, it knows forever.
+  </Card>
+  <Card title="Autonomous Tasks" icon="gears">
+    Give Johnny5 a goal and it will work through it step-by-step, running code and researching as needed.
+  </Card>
+  <Card title="Custom Skills" icon="wand-magic-sparkles">
+    Build reusable skills for Johnny5 — repeatable workflows it can execute on demand.
+  </Card>
+  <Card title="Living Files" icon="file-code">
+    Attach files that Johnny5 always has access to — project context, style guides, business rules.
+  </Card>
+</Columns>
+
+## Use Cases
+
+### Second Brain
+
+Turn Johnny5 into a personal knowledge system. Text it anything you want to remember — links, ideas, tasks, book notes. Search and browse everything later from the Johnny5 interface.
+
+```
+"Remember that I want to read 'The Pragmatic Programmer'"
+"Save this link: [URL] — good reference for JWT auth"
+"What links have I saved about authentication?"
+```
+
+### Morning Brief
+
+Have Johnny5 prepare a personalized daily briefing — top news, content ideas, your task list, and proactive suggestions for what it can handle for you.
+
+```
+"Set up a daily morning brief at 8 AM with top AI news,
+ 3 content ideas for my channel, and my tasks for today"
+```
+
+### Goal-Driven Autonomous Tasks
+
+Share your goals with Johnny5, and it will proactively generate and complete tasks that move you toward them — research, drafts, code improvements, competitor analysis.
+
+```
+"Here are my goals for this quarter: [goals]
+ Every morning, generate 4-5 tasks you can complete for me
+ and start working on the highest priority one."
+```
+
+### Market Research
+
+Research what people are discussing on Reddit and X about any topic — find pain points, opportunities, and trends.
+
+```
+"Research challenges people have with AI coding assistants
+ from the last 30 days. Find the top pain points and
+ suggest product opportunities."
+```
+
+### Content Factory
+
+Set up a multi-agent pipeline: one agent researches trending topics, another writes video scripts, another generates thumbnail concepts. Johnny5 coordinates the workflow and posts results to your preferred channel.
+
+### Mission Control
+
+Replace third-party apps with custom-built tools integrated with Johnny5's memory — a unified calendar, task manager, notes, and metrics dashboard all in one place.
+
+## Getting Started
+
+Start a conversation in the Johnny5 tab:
+
+```
+"Hi! I'm Mike. I'm building Coder1 IDE —
+ an agentic web IDE for Claude Code users."
+```
+
+Johnny5 will remember this context across all future sessions.
+
+**Give it goals:**
+
+```
+"My main goals are to grow Coder1's user base,
+ ship new features weekly, and create content
+ about Claude Code for my YouTube channel."
+```
+
+**Ask it to do things:**
+
+```
+"Draft a Twitter thread announcing our new Johnny5 memory feature"
+"Research our top competitors and summarize their key differentiators"
+"Help me plan this week's sprint"
+```
+
+## Memory & Privacy
+
+Johnny5 stores memories in your account's private database. Memories are:
+- Only visible to you
+- Used to personalize every response
+- Manageable via `/memory` commands in the chat
+
+```
+/memory list          # See all stored memories
+/memory delete [id]   # Delete a specific memory
+/memory clear         # Clear all memories (use with caution)
+```

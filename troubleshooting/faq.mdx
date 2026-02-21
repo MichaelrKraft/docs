@@ -1,0 +1,95 @@
+---
+title: "FAQ"
+description: "Answers to common questions about Coder1, the Bridge, and Johnny5."
+---
+
+## General
+
+<AccordionGroup>
+  <Accordion title="Why do I need the Bridge?">
+    The Bridge lets you use your existing **Claude subscription** ($20/month) instead of paying for API access ($200-500/month). It also keeps your code private — everything runs locally on your machine.
+  </Accordion>
+  <Accordion title="Is Coder1 a cloud IDE like GitHub Codespaces?">
+    No. The Coder1 web app runs in your browser, but all code execution happens on YOUR computer via the Bridge. Think of it like SSH or VSCode Remote — remote control, not cloud hosting.
+  </Accordion>
+  <Accordion title="What happens if Coder1 shuts down?">
+    Your code is on YOUR computer — we never hold it. If we disappeared tomorrow, you'd still have all your files, and Claude Code CLI still works without our platform. The Bridge is also open source.
+  </Accordion>
+  <Accordion title="Can I use Coder1 on multiple projects?">
+    Yes. Once the Bridge is connected, you can `cd` into any directory on your computer from the IDE terminal.
+  </Accordion>
+</AccordionGroup>
+
+## Bridge & Connection
+
+<AccordionGroup>
+  <Accordion title="My pairing code expired">
+    Codes expire after **5 minutes**. Click the **Bridge** button in the IDE to generate a fresh code.
+  </Accordion>
+  <Accordion title="'Command not found: coder1-bridge'">
+    The installer may not have added it to your PATH:
+    ```bash
+    npm install -g coder1-bridge
+    # Or:
+    export PATH="$PATH:~/.npm-global/bin"
+    ```
+  </Accordion>
+  <Accordion title="The bridge connected but I get 'Bridge error' on first command">
+    After a server restart, the bridge infrastructure needs a moment to warm up. Wait a few seconds, refresh the browser page, and try again.
+  </Accordion>
+  <Accordion title="Bridge connected but Claude Code not responding">
+    Verify Claude Code works directly in your local terminal:
+    ```bash
+    claude "hello"
+    ```
+    If that fails, Claude Code may not be installed. Download it at [claude.ai/download](https://claude.ai/download).
+  </Accordion>
+  <Accordion title="Can Coder1 run commands on my computer without my permission?">
+    No. The Bridge only executes commands **you type** in the IDE. Nothing runs on your computer without your action.
+  </Accordion>
+  <Accordion title="What if my internet drops?">
+    The Bridge will attempt to reconnect automatically. If it can't, press Ctrl+C to stop it, then run `coder1-bridge start` and get a new code.
+  </Accordion>
+  <Accordion title="Is my Claude API key at risk?">
+    Your API key stays on YOUR computer. The Bridge doesn't need it or transmit it anywhere.
+  </Accordion>
+</AccordionGroup>
+
+## Johnny5
+
+<AccordionGroup>
+  <Accordion title="Does Johnny5 remember things between sessions?">
+    Yes. Johnny5 has a persistent memory system that stores facts, preferences, and context across sessions. It learns your workflow over time.
+  </Accordion>
+  <Accordion title="Does Johnny5 require the Bridge?">
+    No. Johnny5 connects through Coder1's servers — it works without the Bridge. The Bridge is only needed for terminal commands and file-based operations.
+  </Accordion>
+  <Accordion title="How do I clear Johnny5's memory?">
+    Type `/memory clear` in the Johnny5 chat. You can also delete individual memories with `/memory delete [id]`.
+  </Accordion>
+  <Accordion title="Johnny5 seems to have forgotten context">
+    Try `/memory list` to see what it has stored. You may need to re-share context if a session was very long or memory wasn't captured for a particular topic.
+  </Accordion>
+</AccordionGroup>
+
+## Privacy & Data
+
+<AccordionGroup>
+  <Accordion title="Can Coder1 see my code?">
+    No. Your code files never leave your computer. Only commands you type and their output travel over the encrypted connection.
+  </Accordion>
+  <Accordion title="What data do you collect?">
+    We collect anonymous usage metrics only: connection timestamps, command counts (not content), and crash logs. We do **not** collect code, file contents, or command text.
+  </Accordion>
+  <Accordion title="Can I disable telemetry?">
+    Yes:
+    ```bash
+    export CODER1_TELEMETRY=false
+    coder1-bridge start
+    ```
+    To make it permanent, add the export line to your `~/.zshrc` or `~/.bashrc`.
+  </Accordion>
+  <Accordion title="Can my company's IT department see my code?">
+    No. The connection is encrypted (TLS 1.3 / WSS). Your IT team can see that you're connecting to coder1.ai, but cannot read the encrypted payload — and your files never leave your machine anyway.
+  </Accordion>
+</AccordionGroup>
